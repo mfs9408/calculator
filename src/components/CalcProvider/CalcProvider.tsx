@@ -1,8 +1,4 @@
-import React, {
-  createContext,
-  PropsWithChildren,
-  useState,
-} from "react";
+import React, { createContext, PropsWithChildren, useState } from "react";
 
 interface OtherProps {}
 type ContextProps = PropsWithChildren<OtherProps>;
@@ -21,6 +17,9 @@ const CalcProvider = ({ children }: ContextProps) => {
     setNumber(numberValue);
     setFirstOperand(numberValue);
   };
+
+  const cleanButtonName =
+    firstOperand === 0 && secondOperand === 0 && number === 0 ? true : false;
 
   const plusFunction = () => {
     setNumber(0);
@@ -80,7 +79,7 @@ const CalcProvider = ({ children }: ContextProps) => {
         divisionFunction,
         multiplyFunction,
         clearAllFunction,
-        firstOperand,
+        cleanButtonName,
       }}
     >
       {children}

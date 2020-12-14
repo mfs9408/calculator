@@ -3,11 +3,11 @@ import { Button } from "@material-ui/core";
 import { ContextStore } from "../CalcProvider/CalcProvider";
 
 const ClearButton = () => {
-  const { clearAllFunction, firstOperand } = useContext(ContextStore);
+  const { clearAllFunction, cleanButtonName } = useContext(ContextStore);
 
   return (
     <Button onClick={() => clearAllFunction()}>
-      {firstOperand === 0 ? "AC" : "C"}
+      {cleanButtonName ? "AC" : "C"}
     </Button>
   );
 };
