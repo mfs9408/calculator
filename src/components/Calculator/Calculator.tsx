@@ -11,13 +11,13 @@ import DivisionButton from "../DivisionButton";
 import MultiplyButton from "../MultiplyButton";
 
 const Calculator = () => {
-  const { number } = useContext(ContextStore);
+  const { enteredNumber, firstOperand } = useContext(ContextStore);
   const classes = useStyles();
 
   return (
     <Grid className={classes.root}>
       <Grid container justify="flex-end">
-        {number}
+        {!enteredNumber.length && !firstOperand ? "0" : enteredNumber || firstOperand}
       </Grid>
       <Grid>
         <ClearButton />

@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Button } from "@material-ui/core";
+import Button from "@material-ui/core/Button";
 import { ContextStore } from "../CalcProvider/CalcProvider";
 
 type NumberProp = {
@@ -7,11 +7,11 @@ type NumberProp = {
 };
 
 const NumberButton = ({ buttonValue }: NumberProp) => {
-  const { calculateExpression } = useContext(ContextStore);
+  const { clickButton } = useContext(ContextStore);
 
   return (
     <div>
-      <Button onClick={() => calculateExpression(buttonValue)}>{buttonValue}</Button>
+      <Button onClick={() => clickButton(buttonValue)}>{buttonValue}</Button>
     </div>
   );
 };

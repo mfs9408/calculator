@@ -3,9 +3,9 @@ import { Button } from "@material-ui/core";
 import { ContextStore } from "../CalcProvider/CalcProvider";
 
 const DivisionButton = () => {
-  const { divisionFunction } = useContext(ContextStore);
+  const { calculationFunction } = useContext(ContextStore);
 
-  return <Button onClick={() => divisionFunction()}>/</Button>;
+  return <Button onClick={() => calculationFunction("/")}>/</Button>;
 };
 
 export default DivisionButton;

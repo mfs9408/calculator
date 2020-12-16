@@ -3,9 +3,9 @@ import { Button } from "@material-ui/core";
 import { ContextStore } from "../CalcProvider/CalcProvider";
 
 const MultiplyButton = () => {
-  const { multiplyFunction } = useContext(ContextStore);
+  const { calculationFunction } = useContext(ContextStore);
 
-  return <Button onClick={() => multiplyFunction()}>X</Button>;
+  return <Button onClick={() => calculationFunction("*")}>X</Button>;
 };
 
 export default MultiplyButton;
