@@ -1,11 +1,11 @@
-import React, { useContext } from "react";
-import { Button } from "@material-ui/core";
-import { ContextStore } from "../CalcProvider/CalcProvider";
+import React from 'react';
+import { Button } from '@material-ui/core';
+import { useHandleOperatorButtonClick } from '../../handlers';
 
 const DivisionButton = () => {
-  const { calculationFunction } = useContext(ContextStore);
+  const handleOperatorButtonClick = useHandleOperatorButtonClick('Divide');
 
-  return <Button onClick={() => calculationFunction("/")}>/</Button>;
+  return <Button onClick={handleOperatorButtonClick}>/</Button>;
 };
 
 export default DivisionButton;

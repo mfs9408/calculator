@@ -1,13 +1,18 @@
 import React, { useContext } from "react";
 import { Button } from "@material-ui/core";
-import { ContextStore } from "../CalcProvider/CalcProvider";
+import { CalcContext } from "../CalcProvider/CalcProvider";
 
 const ClearButton = () => {
-  const { clearAll, enteredNumber, firstOperand } = useContext(ContextStore);
+  const {firstOperand, secondOperand, setFirstOperand, setSecondOperand } = useContext(CalcContext);
+
+  const handleClearButtonClick = () => {
+    setFirstOperand('0');
+    setSecondOperand('0');
+  };
 
   return (
-    <Button onClick={() => clearAll()}>
-      {enteredNumber === 0 && firstOperand === 0 ? "AC" : "C"}
+    <Button onClick={handleClearButtonClick}>
+      {firstOperand === '0' && secondOperand === '0' ? "AC" : "C"}
     </Button>
   );
 };

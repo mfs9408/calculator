@@ -1,19 +1,23 @@
-import React, { useContext } from "react";
-import Button from "@material-ui/core/Button";
-import { ContextStore } from "../CalcProvider/CalcProvider";
+import React, { useContext } from 'react';
+import Button from '@material-ui/core/Button';
+import { CalcContext } from '../CalcProvider/CalcProvider';
 
-type NumberProp = {
+type NumberButtonProps = {
   buttonValue: number;
 };
 
-const NumberButton = ({ buttonValue }: NumberProp) => {
-  const { clickButton } = useContext(ContextStore);
+const NumberButton = ({ buttonValue }: NumberButtonProps) => {
+  const { setFirstOperand, firstOperand } = useContext(CalcContext);
 
-  return (
-    <div>
-      <Button onClick={() => clickButton(buttonValue)}>{buttonValue}</Button>
-    </div>
-  );
+  const handleNumberButtonClick = () => {
+    setFirstOperand(
+      firstOperand !== null && firstOperand !== '0'
+        ? `${firstOperand + buttonValue}`
+        : buttonValue.toString()
+    );
+  };
+
+  return <Button onClick={handleNumberButtonClick}>{buttonValue}</Button>;
 };
 
 export default NumberButton;

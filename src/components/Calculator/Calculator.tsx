@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import Grid from "@material-ui/core/Grid";
 import ClearButton from "../ClearButton";
-import { ContextStore } from "../CalcProvider/CalcProvider";
+import { CalcContext } from "../CalcProvider/CalcProvider";
 import useStyles from "./Calculator.styles";
 import NumberButton from "../NumberButton";
 import PlusButton from "../PlusButton";
@@ -11,13 +11,13 @@ import DivisionButton from "../DivisionButton";
 import MultiplyButton from "../MultiplyButton";
 
 const Calculator = () => {
-  const { enteredNumber, firstOperand } = useContext(ContextStore);
+  const { displayText } = useContext(CalcContext);
   const classes = useStyles();
 
   return (
     <Grid className={classes.root}>
       <Grid container justify="flex-end">
-        {!enteredNumber.length && !firstOperand ? "0" : enteredNumber || firstOperand}
+        {displayText}
       </Grid>
       <Grid>
         <ClearButton />

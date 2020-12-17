@@ -1,14 +1,14 @@
-import React, { useContext } from "react";
-import { Button } from "@material-ui/core";
-import { ContextStore } from "../CalcProvider/CalcProvider";
-import useStyles from "../commonStyles";
+import React from 'react';
+import { Button } from '@material-ui/core';
+import useStyles from '../commonStyles';
+import { useHandleOperatorButtonClick } from '../../handlers';
 
 const PlusButton = () => {
-  const { calculationFunction } = useContext(ContextStore);
   const classes = useStyles();
+  const handleOperatorButtonClick = useHandleOperatorButtonClick('Plus');
 
   return (
-    <Button className={classes.button} onClick={() => calculationFunction("+")}>
+    <Button className={classes.button} onClick={handleOperatorButtonClick}>
       +
     </Button>
   );

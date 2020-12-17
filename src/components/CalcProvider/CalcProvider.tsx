@@ -1,79 +1,63 @@
 import React, {
   createContext,
+  Dispatch,
   PropsWithChildren,
+  SetStateAction,
   useState,
-} from "react";
-import Example from "../../Example";
+} from 'react';
 
-interface OtherProps {}
-type ContextProps = PropsWithChildren<OtherProps>;
+export enum Operator {
+  Plus,
+  Minus,
+  Multiple,
+  Divide,
+}
 
-export const ContextStore = createContext<any>(null);
+export type OperatorUnion = keyof typeof Operator;
 
-const CalcProvider = ({ children }: ContextProps) => {
-  const [enteredNumber, setEnteredNumber] = useState<any>(0);
-  const [firstOperand, setFirstOperand] = useState<any>(0);
-  const [type, setType] = useState<string | null>(null);
+interface CalcContextValue {
+  operator: Operator | null;
+  firstOperand: string | null;
+  secondOperand: string | null;
+  setFirstOperand: Dispatch<SetStateAction<string | null>>;
+  setSecondOperand: Dispatch<SetStateAction<string | null>>;
+  setOperator: Dispatch<SetStateAction<Operator | null>>;
+  displayText: string;
+}
 
-  const clickButton = (num: number) => {
-    setEnteredNumber(`${enteredNumber + num}`);
-  };
+const initialState = {
+  operator: null,
+  firstOperand: null,
+  secondOperand: null,
+  setFirstOperand: () => {},
+  setSecondOperand: () => {},
+  setOperator: () => {},
+  displayText: '0',
+};
 
-  const handleSetFirstOperand = () => {
-    setFirstOperand(enteredNumber);
-    setEnteredNumber(0);
-  };
+export const CalcContext = createContext<CalcContextValue>(initialState);
 
-  const calculationFunction = (type: string) => {
-    if (enteredNumber) {
-      handleSetFirstOperand();
-      setType(type);
-    }
-    if (firstOperand) {
-      setType(type);
-    }
-  };
+const CalcProvider = ({ children }: PropsWithChildren<{}>) => {
+  const [firstOperand, setFirstOperand] = useState<string | null>(null);
+  const [secondOperand, setSecondOperand] = useState<string | null>(null);
+  const [operator, setOperator] = useState<Operator | null>(null);
 
-  const clearAll = () => {
-    setEnteredNumber(0);
-    setFirstOperand(0);
-  };
-
-  const equalFunction = () => {
-    if (enteredNumber && firstOperand) {
-      switch (type) {
-        case "+":
-          setFirstOperand(parseFloat(enteredNumber) + parseFloat(firstOperand));
-          break;
-        case "-":
-          setFirstOperand(parseFloat(firstOperand) - parseFloat(enteredNumber));
-          break;
-        case "/":
-          setFirstOperand(parseFloat(firstOperand) / parseFloat(enteredNumber));
-          break;
-        case "*":
-          setFirstOperand(parseFloat(enteredNumber) * parseFloat(firstOperand));
-          break;
-      }
-    }
-    setEnteredNumber(0);
-  };
-
-  // Example();
+  const displayText = firstOperand || '0';
 
   return (
-    <ContextStore.Provider
+    <CalcContext.Provider
       value={{
-        enteredNumber,
+        operator,
         firstOperand,
-        clickButton,
-        calculationFunction,
-        equalFunction,
-        clearAll,
+        secondOperand,
+        setFirstOperand,
+        setSecondOperand,
+        setOperator,
+        displayText,
       }}
     >
       {children}
-    </ContextStore.Provider>
+    </CalcContext.Provider>
   );
 };
 

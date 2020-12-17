@@ -1,11 +1,11 @@
-import React, { useContext } from "react";
-import { Button } from "@material-ui/core";
-import { ContextStore } from "../CalcProvider/CalcProvider";
+import React from 'react';
+import { Button } from '@material-ui/core';
+import { useHandleOperatorButtonClick } from '../../handlers';
 
 const MultiplyButton = () => {
-  const { calculationFunction } = useContext(ContextStore);
+  const handleOperatorButtonClick = useHandleOperatorButtonClick('Multiple');
 
-  return <Button onClick={() => calculationFunction("*")}>X</Button>;
+  return <Button onClick={handleOperatorButtonClick}>X</Button>;
 };
 
 export default MultiplyButton;
