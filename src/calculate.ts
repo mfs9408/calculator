@@ -1,6 +1,6 @@
 import { Operator } from './components/CalcProvider/CalcProvider';
 
-export default function calculate(a: number, b: number, operator: Operator) {
+export default function calculate(a: number, b: number, operator: Operator): number {
   switch (operator) {
     case Operator.Plus:
       return a + b;

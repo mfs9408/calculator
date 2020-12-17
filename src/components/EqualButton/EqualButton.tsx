@@ -13,11 +13,11 @@ const EqualButton = () => {
   } = useContext(CalcContext);
 
   const handleClick = () => {
-    if (!operator) return;
+    if (operator === null) return;
 
     if (firstOperand && secondOperand) {
       setFirstOperand(
-        calculate(+firstOperand, +setSecondOperand, operator).toString()
+        calculate(+firstOperand, +secondOperand, operator).toString()
       );
     }
 
